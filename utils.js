@@ -1,8 +1,4 @@
-/**
- * @description Code to create a delay  between min and max values
- * @description Code based in https://github.com/boo1ean/express-delay
- */
- let timers = require('timers');
+let timers = require('timers');
 
  let getRandomByInterval = (min, max,isInt)=>{
     if(isInt==true){
