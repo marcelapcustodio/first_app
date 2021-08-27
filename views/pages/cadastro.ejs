@@ -3,12 +3,12 @@
 <div class="table-responsive-xl ">
     <h2>Usuários Cadastrados</h2>
     <p>Lista de usuários Cadastrados no sistema.</p>            
-    <table class="table table-hover bg-light" id="list">
+    <table name="aa" class="table table-hover bg-light" id="list">
         <thead class="thead-dark">
         <tr>
             <th>Nome</th>
-            <th>Endereço</th>
             <th>Email</th>
+            <th>Endereço</th>
             <th>Idade</th>
             <th>Altura</th>
             <th>Vota?</th>
@@ -21,6 +21,7 @@
 
             <% let linkRemove="/cadastro/remove/"; %>
             <% let linkUpdate="/cadastro/update/"; %>
+            <% let linkAdd="/cadastro/add/"; %>
 
             <% if(users.length >0){%>
                 <% for(let index=0;index<users.length;index++){ %>
@@ -40,18 +41,17 @@
                     </td>
                     <td data-index-row="<%=index%>">
                         <span  class="show"><%= users[index].age %></span>
-                        <input type="text" name="age"  class="hidden" value="<%= users[index].age %>">
+                        <input type="number" name="age"  min="1" max="100" step="1" class="hidden" value="<%= users[index].age %>">
                         
                     </td>
                     <td data-index-row="<%=index%>">
                         <span  class="show"><%= users[index].heigth %></span>
-                        <input type="text" name="heigth"  class="hidden" value="<%= users[index].heigth %>">
+                        <input type="number" name="heigth" class="hidden" value="<%= users[index].heigth %>">
                         
                     </td>
                     <td data-index-row="<%=index%>">
                         <span  class="show"><%= users[index].vote %></span>
-                        <input type="text" name="vote" class="hidden" value="<%= users[index].vote %>">
-                        
+                        <input type="checkbox" name="vote" class="hidden" value="<%= users[index].vote %>">
                     </td>
                     <td data-index-row="<%=index%>" class="hidden" data-index-row="<%=index%>">
                         <input type="button" value="Atualizar" class="hidden" >
@@ -74,7 +74,7 @@
         </tbody>
     </table>
     <h2>Cadastrar novo usuário</h2>
-    <form action="/cadastro/add" method="post">
+    <form name="cadastro" action="#">
         <div class="form-group">
             <label for="_name">Nome:</label>
             <input type="text" name="_name" id="_name" class="form-control">
@@ -88,20 +88,39 @@
             <input type="text" name="_address" id="_address" class="form-control">
         </div>
         <div class="form-group">
-            <label for="_heigth">Altura:</label>
-            <input type="text" name="_heigth" id="_heigth" class="form-control">
+            <label for="_age">Idade:</label>
+            <input type="number" name="_age" id="_age" class="form-control">
         </div>
         <div class="form-group">
-            <label for="_age">Idade:</label>
-            <input type="text" name="_age" id="_age" class="form-control">
+            <label for="_heigth">Altura:</label>
+            <input type="number" name="_heigth" id="_height" class="form-control">
         </div>
         <div class="form-group">
             <label for="_vote">Votou:</label>
-            <input type="text" name="_vote" id="_vote" class="form-control">
+            <input type="checkbox" name="_vote" id="_vote" class="form-control">
         </div>
         <div class="form-group">
-            <input type="submit" value="Enviar"  class="btn btn-success">
+            <input type="button" onclick="add(document.cadastro,'<%=linkAdd%>')" value="Enviar"  class="btn btn-success">
         </div>
     </form>
+    <!-- <% let linklist="/cadastro/list/"; %> -->
+
+    <input type="button" onclick="listar('/cadastro/list/')" value="Listar Usuários"  class="btn btn-success">
+    <div class="table-responsive-xl ">
+        <h2>Lista de Usuários</h2>
+        <p>Lista de usuários Cadastrados no sistema.</p>            
+        <table class="table table-hover bg-light" id="list-users">
+            <thead class="thead-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Endereço</th>
+                <th>Idade</th>
+                <th>Altura</th>
+                <th>Vota?</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
     
 </div>
